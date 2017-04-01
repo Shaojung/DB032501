@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/tvDetailID"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/tvDetailName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvDetailID"
@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/tvDetailAddr"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/tvDetailName"
         android:layout_below="@+id/tvDetailName"
@@ -32,7 +32,7 @@
 
     <TextView
         android:id="@+id/tvDetailTel"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/tvDetailAddr"
         android:layout_below="@+id/tvDetailAddr"
