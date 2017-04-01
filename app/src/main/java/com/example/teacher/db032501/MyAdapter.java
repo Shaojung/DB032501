@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.teacher.db032501.data.Student;
@@ -22,10 +23,12 @@ import java.util.ArrayList;
 public class MyAdapter extends BaseAdapter {
     ArrayList<Student> students;
     Context context;
+    public boolean chks[];
     public MyAdapter(Context context, ArrayList<Student> stu)
     {
-        this.context = context;
+        this.context= context;
         students = stu;
+        chks = new boolean[students.size()];
     }
     @Override
     public int getCount() {
@@ -48,6 +51,13 @@ public class MyAdapter extends BaseAdapter {
         View v = inflater.inflate(R.layout.myitem, null);
         TextView tv = (TextView) v.findViewById(R.id.textView);
         CheckBox chk = (CheckBox) v.findViewById(R.id.checkBox);
+        chk.setChecked(chks[position]);
+        chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                chks[position] = isChecked;
+            }
+        });
         tv.setText(students.get(position).Name);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
