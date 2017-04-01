@@ -20,7 +20,7 @@ import com.example.teacher.db032501.data.StudentDAOMemoryImpl;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    String[] str;
+    ArrayList<String> str = new ArrayList<>();
     ListView lv;
     ArrayAdapter<String> adapter;
     @Override
@@ -29,17 +29,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    private void refreshStr()
+    {
+        final StudentDAOMemoryImpl impl = new StudentDAOMemoryImpl();
+        final ArrayList<Student> list = impl.getAllStudents();
+        str.clear();
+        int i;
+        for (i=0;i<list.size();i++)
+        {
+            str.add(list.get(i).Name);
+        }
+        Log.d("STR", "Str Length:" + str.size());
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         final StudentDAOMemoryImpl impl = new StudentDAOMemoryImpl();
         final ArrayList<Student> list = impl.getAllStudents();
-        str = new String[list.size()];
-        int i;
-        for (i=0;i<list.size();i++)
-        {
-            str[i] = list.get(i).Name;
-        }
+        refreshStr();
 
         lv = (ListView) findViewById(R.id.listView);
         adapter = new ArrayAdapter<String>(MainActivity.this,
@@ -55,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         impl.remove(list.get(position));
+                        refreshStr();
                         adapter.notifyDataSetChanged();
+
                     }
                 });
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
