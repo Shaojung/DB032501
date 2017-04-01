@@ -108,6 +108,11 @@ public class MainActivity extends AppCompatActivity {
             }
             impl.remove(removeList);
             adapter.notifyDataSetChanged();
+            for(boolean b : adapter.chks)
+            {
+                b = false;
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }
