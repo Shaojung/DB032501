@@ -57,6 +57,14 @@ public class MyAdapter extends BaseAdapter {
                 context.startActivity(it);
             }
         });
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(context, DetailActivity.class);
+                it.putExtra("ID", students.get(position).ID);
+                context.startActivity(it);
+            }
+        });
         return v;
     }
 }
