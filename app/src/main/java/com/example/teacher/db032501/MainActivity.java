@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     ArrayList<String> str = new ArrayList<>();
     ListView lv;
-    ArrayAdapter<String> adapter;
+    MyAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
         refreshStr();
 
         lv = (ListView) findViewById(R.id.listView);
-        adapter = new ArrayAdapter<String>(MainActivity.this,
-                android.R.layout.simple_list_item_1, str);
+        adapter = new MyAdapter(MainActivity.this, list);
 
         lv.setAdapter(adapter);
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
