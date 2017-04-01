@@ -7,19 +7,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.teacher.db032501.data.Student;
+import com.example.teacher.db032501.data.StudentDAO;
+import com.example.teacher.db032501.data.StudentDAOFactory;
 import com.example.teacher.db032501.data.StudentDAOMemoryImpl;
 
 public class DetailActivity extends AppCompatActivity {
     TextView tv1;
     EditText edName, edAddr, edTel;
     Student student;
-    StudentDAOMemoryImpl impl;
+    StudentDAO impl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         int ID = getIntent().getIntExtra("ID", 0);
-        impl = new StudentDAOMemoryImpl();
+        impl = StudentDAOFactory.getInstance(MainActivity.MyDAOType);
         student = impl.getStudent(ID);
         tv1 = (TextView) findViewById(R.id.tvDetailID);
         edName = (EditText) findViewById(R.id.edName);

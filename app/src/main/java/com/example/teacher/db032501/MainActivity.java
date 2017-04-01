@@ -13,8 +13,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.teacher.db032501.data.DAOType;
 import com.example.teacher.db032501.data.Student;
 import com.example.teacher.db032501.data.StudentDAO;
+import com.example.teacher.db032501.data.StudentDAOFactory;
 import com.example.teacher.db032501.data.StudentDAOMemoryImpl;
 
 import java.util.ArrayList;
@@ -24,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Student> list;
     ListView lv;
     MyAdapter adapter;
-    StudentDAOMemoryImpl impl;
+    final static DAOType MyDAOType = DAOType.MEMORY;
+    StudentDAO impl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        final StudentDAOMemoryImpl impl = new StudentDAOMemoryImpl();
+        final StudentDAO impl = StudentDAOFactory.getInstance(MyDAOType);
         list = impl.getAllStudents();
         refreshStr();
 

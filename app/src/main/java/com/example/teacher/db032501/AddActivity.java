@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.teacher.db032501.data.Student;
+import com.example.teacher.db032501.data.StudentDAO;
+import com.example.teacher.db032501.data.StudentDAOFactory;
 import com.example.teacher.db032501.data.StudentDAOMemoryImpl;
 
 public class AddActivity extends AppCompatActivity {
@@ -22,7 +24,7 @@ public class AddActivity extends AppCompatActivity {
     }
     public void clickAdd(View v)
     {
-        StudentDAOMemoryImpl impl = new StudentDAOMemoryImpl();
+        StudentDAO impl = StudentDAOFactory.getInstance(MainActivity.MyDAOType);
         int no = Integer.valueOf(ed.getText().toString());
         String n = ed2.getText().toString();
         String t = ed3.getText().toString();
