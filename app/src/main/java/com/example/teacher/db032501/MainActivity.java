@@ -34,24 +34,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    private void refreshStr()
-    {
-        impl = new StudentDAOMemoryImpl();
-        str.clear();
-        int i;
-        for (i=0;i<list.size();i++)
-        {
-            str.add(list.get(i).Name);
-        }
-        Log.d("STR", "Str Length:" + str.size());
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
         final StudentDAO impl = StudentDAOFactory.getInstance(MyDAOType);
         list = impl.getAllStudents();
-        refreshStr();
 
         lv = (ListView) findViewById(R.id.listView);
         adapter = new MyAdapter(MainActivity.this, list);
@@ -66,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         impl.remove(list.get(position));
-                        refreshStr();
                         adapter.notifyDataSetChanged();
 
                     }
