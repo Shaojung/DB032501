@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        StudentDAOMemoryImpl impl = new StudentDAOMemoryImpl();
-        ArrayList<Student> list = impl.getAllStudents();
+        final StudentDAOMemoryImpl impl = new StudentDAOMemoryImpl();
+        final ArrayList<Student> list = impl.getAllStudents();
         str = new String[list.size()];
         int i;
         for (i=0;i<list.size();i++)
@@ -50,10 +50,12 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        lv.setOnClickListener(new View.OnClickListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent it = new Intent(MainActivity.this, DetailActivity.class);
+                it.putExtra("ID", list.get(position).ID);
+                startActivity(it);
             }
         });
     }

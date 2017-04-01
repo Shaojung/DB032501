@@ -8,7 +8,7 @@ import java.util.List;
  */
 
 public class StudentDAOMemoryImpl implements StudentDAO {
-    public static ArrayList<Student> data = new ArrayList<>();;
+    public static ArrayList<Student> data = new ArrayList<>();
 
     @Override
     public void clearAll()
