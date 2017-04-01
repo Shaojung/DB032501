@@ -21,8 +21,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<String> str = new ArrayList<>();
+    ArrayList<Student> list;
     ListView lv;
     MyAdapter adapter;
+    StudentDAOMemoryImpl impl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void refreshStr()
     {
-        final StudentDAOMemoryImpl impl = new StudentDAOMemoryImpl();
-        final ArrayList<Student> list = impl.getAllStudents();
+        impl = new StudentDAOMemoryImpl();
         str.clear();
         int i;
         for (i=0;i<list.size();i++)
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         final StudentDAOMemoryImpl impl = new StudentDAOMemoryImpl();
-        final ArrayList<Student> list = impl.getAllStudents();
+        list = impl.getAllStudents();
         refreshStr();
 
         lv = (ListView) findViewById(R.id.listView);
@@ -91,6 +92,22 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.menuAdd)
         {
             startActivity(new Intent(MainActivity.this, AddActivity.class));
+        }
+
+        if (item.getItemId() == R.id.menuDelete)
+        {
+            ArrayList<Student> removeList = new ArrayList<>();
+            int i;
+            for (i=list.size()-1;i>=0;i--)
+            {
+                if (adapter.chks[i])
+                {
+                    removeList.add(list.get(i));
+                    list.remove(i);
+                }
+            }
+            impl.remove(removeList);
+            adapter.notifyDataSetChanged();
         }
         return super.onOptionsItemSelected(item);
     }
