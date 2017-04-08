@@ -21,7 +21,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         int ID = getIntent().getIntExtra("ID", 0);
-        impl = StudentDAOFactory.getInstance(MainActivity.MyDAOType);
+        impl = StudentDAOFactory.getInstance(DetailActivity.this, MainActivity.MyDAOType);
         student = impl.getStudent(ID);
         tv1 = (TextView) findViewById(R.id.tvDetailID);
         edName = (EditText) findViewById(R.id.edName);

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        final StudentDAO impl = StudentDAOFactory.getInstance(MyDAOType);
+        final StudentDAO impl = StudentDAOFactory.getInstance(MainActivity.this, MyDAOType);
         list = impl.getAllStudents();
 
         lv = (ListView) findViewById(R.id.listView);

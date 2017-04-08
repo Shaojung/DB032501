@@ -24,7 +24,7 @@ public class AddActivity extends AppCompatActivity {
     }
     public void clickAdd(View v)
     {
-        StudentDAO impl = StudentDAOFactory.getInstance(MainActivity.MyDAOType);
+        StudentDAO impl = StudentDAOFactory.getInstance(AddActivity.this, MainActivity.MyDAOType);
         int no = Integer.valueOf(ed.getText().toString());
         String n = ed2.getText().toString();
         String t = ed3.getText().toString();
