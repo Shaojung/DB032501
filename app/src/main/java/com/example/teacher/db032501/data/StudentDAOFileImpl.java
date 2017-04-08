@@ -77,21 +77,56 @@ public class StudentDAOFileImpl implements StudentDAO {
 
     @Override
     public void update(Student s) {
-
+        for (Student d : data)
+        {
+            if (d.ID == s.ID)
+            {
+                d.Name = s.Name;
+                d.Tel = s.Tel;
+                d.Addr = s.Addr;
+            }
+        }
+        saveFile();
     }
 
     @Override
     public void remove(Student s) {
-
+        int i;
+        for (i=data.size()-1;i>=0;i--)
+        {
+            if (data.get(i).ID == s.ID)
+            {
+                data.remove(i);
+            }
+        }
+        saveFile();
     }
 
     @Override
     public void remove(List<Student> lst) {
-
+        int i;
+        for (i=data.size()-1;i>=0;i--)
+        {
+            for (Student s : lst) {
+                if (data.get(i).ID == s.ID)
+                {
+                    data.remove(i);
+                    break;
+                }
+            }
+        }
+        saveFile();
     }
 
     @Override
     public Student getStudent(int ID) {
+        for (Student d : data)
+        {
+            if (d.ID == ID)
+            {
+                return d;
+            }
+        }
         return null;
     }
 
@@ -102,6 +137,7 @@ public class StudentDAOFileImpl implements StudentDAO {
 
     @Override
     public void clearAll() {
-
+        data.clear();
+        saveFile();
     }
 }
