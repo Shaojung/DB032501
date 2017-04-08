@@ -3,11 +3,16 @@ package com.example.teacher.db032501.data;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -33,18 +38,41 @@ public class StudentDAOFileImpl implements StudentDAO {
     {
         try {
             BufferedReader br = new BufferedReader(new FileReader(dataFile));
-            String data = br.readLine();
-            Log.d("MYDATA", data);
+            String dataStr = br.readLine();
+            data.clear();
+            Gson gson = new Gson();
+            data = gson.fromJson(dataStr, new TypeToken<List<Student>>(){}.getType());
+            br.close();
         } catch (FileNotFoundException e) {
+            data = new ArrayList<>();
             e.printStackTrace();
         } catch (IOException e) {
+            data = new ArrayList<>();
             e.printStackTrace();
         }
     }
 
+    private void saveFile()
+    {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(dataFile));
+            Gson gson = new Gson();
+            String dataStr = gson.toJson(data);
+            bw.write(dataStr);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
     @Override
     public void add(Student s) {
-
+        data.add(s);
+        saveFile();
     }
 
     @Override
@@ -69,7 +97,7 @@ public class StudentDAOFileImpl implements StudentDAO {
 
     @Override
     public ArrayList<Student> getAllStudents() {
-        return null;
+        return data;
     }
 
     @Override
