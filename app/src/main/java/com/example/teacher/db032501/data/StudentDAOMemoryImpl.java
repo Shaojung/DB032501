@@ -55,6 +55,7 @@ public class StudentDAOMemoryImpl implements StudentDAO {
                 if (data.get(i).ID == s.ID)
                 {
                     data.remove(i);
+                    break;
                 }
             }
         }

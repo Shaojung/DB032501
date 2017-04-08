@@ -92,7 +92,7 @@ public class StudentDAOUnitTest {
         impl.add(new Student(3, "CC", "123123", "AABB"));
 
         ArrayList<Student> lst = new ArrayList<>();
-        lst.add(new Student(1, "AA", "123123", "AABB"));
+        lst.add(new Student(2, "BB", "123123", "AABB"));
         lst.add(new Student(3, "CC", "123123", "AABB"));
 
         impl.remove(lst);
