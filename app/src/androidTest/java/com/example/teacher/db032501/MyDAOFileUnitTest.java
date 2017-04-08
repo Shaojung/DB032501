@@ -33,8 +33,28 @@ public class MyDAOFileUnitTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
         StudentDAO dao = StudentDAOFactory.getInstance(appContext, DAOType.FILE);
+        dao.clearAll();
         dao.add(new Student(1, "AA", "11AA", "AA11111"));
         dao.add(new Student(2, "BB", "22BB", "BB11111"));
+        assertEquals(dao.getAllStudents().size(), 2);
+    }
+
+    @Test
+    public void testRemove() throws Exception
+    {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        StudentDAO dao = StudentDAOFactory.getInstance(appContext, DAOType.FILE);
+        dao.clearAll();
+        dao.add(new Student(1, "AA", "123123", "AABB"));
+        dao.add(new Student(2, "BB", "123123", "AABB"));
+        dao.add(new Student(3, "CC", "123123", "AABB"));
+        Student newdata = new Student(1, "AA", "123123", "AABB");
+        dao.remove(newdata);
+
+        for (Student s : dao.getAllStudents())
+        {
+            System.out.println("test delete:" +  s.toString());
+        }
         assertEquals(dao.getAllStudents().size(), 2);
     }
 }

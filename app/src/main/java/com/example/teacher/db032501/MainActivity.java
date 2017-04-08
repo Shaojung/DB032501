@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Student> list;
     ListView lv;
     MyAdapter adapter;
-    final static DAOType MyDAOType = DAOType.MEMORY;
+    final static DAOType MyDAOType = DAOType.FILE;
     StudentDAO impl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
