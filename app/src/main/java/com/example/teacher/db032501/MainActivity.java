@@ -32,13 +32,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        impl = StudentDAOFactory.getInstance(MainActivity.this, MyDAOType);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        final StudentDAO impl = StudentDAOFactory.getInstance(MainActivity.this, MyDAOType);
         list = impl.getAllStudents();
 
         lv = (ListView) findViewById(R.id.listView);
