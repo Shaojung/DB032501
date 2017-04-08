@@ -1,6 +1,8 @@
 package com.example.teacher.db032501.data;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
@@ -21,7 +23,12 @@ public class StudentDAODBImpl implements StudentDAO {
     }
     @Override
     public void add(Student s) {
-
+        ContentValues cv = new ContentValues();
+        cv.put("ID", s.ID);
+        cv.put("Name", s.Name);
+        cv.put("Tel", s.Tel);
+        cv.put("Addr", s.Addr);
+        db.insert("phone", null, cv );
     }
 
     @Override
@@ -46,7 +53,16 @@ public class StudentDAODBImpl implements StudentDAO {
 
     @Override
     public ArrayList<Student> getAllStudents() {
-        return null;
+        ArrayList<Student> data = new ArrayList<>();
+        Cursor c = db.query("phone", new String[] {"ID", "Name", "Tel", "Addr"}, null, null, null, null, null);
+        if (c.moveToFirst())
+        {
+            do {
+                data.add(new Student(c.getInt(0), c.getString(1), c.getString(2), c.getString(3)));
+            }while (c.moveToNext());
+
+        }
+        return data;
     }
 
     @Override
