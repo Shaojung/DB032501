@@ -15,6 +15,8 @@ public class StudentDAOFactory {
                 return new StudentDAOMemoryImpl();
             case FILE:
                 return new StudentDAOFileImpl(context);
+            case DATABASE:
+                return new StudentDAODBImpl(context);
         }
         return null;
     }
