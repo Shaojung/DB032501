@@ -57,9 +57,14 @@ public class StudentDAOCloudImpl implements StudentDAO {
                     data = new ArrayList<Student>();
                 }
 
-                ((MainActivity) context).list = getAllStudents();
-                ((MainActivity) context).adapter = new MyAdapter(context, ((MainActivity) context).list);
-                ((MainActivity) context).lv.setAdapter(((MainActivity) context).adapter);
+                if (context instanceof MainActivity)
+                {
+                    ((MainActivity) context).list = getAllStudents();
+                    ((MainActivity) context).adapter = new MyAdapter(context, ((MainActivity) context).list);
+                    ((MainActivity) context).lv.setAdapter(((MainActivity) context).adapter);
+                }
+
+
             }
 
             @Override
