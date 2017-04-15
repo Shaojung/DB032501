@@ -32,9 +32,9 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<String> str = new ArrayList<>();
-    ArrayList<Student> list;
-    ListView lv;
-    MyAdapter adapter;
+    public ArrayList<Student> list;
+    public ListView lv;
+    public MyAdapter adapter;
     final static DAOType MyDAOType = DAOType.CLOUD;
     StudentDAO impl;
     @Override
