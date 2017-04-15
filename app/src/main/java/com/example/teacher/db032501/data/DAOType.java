@@ -7,5 +7,6 @@ package com.example.teacher.db032501.data;
 public enum DAOType {
     MEMORY,
     FILE,
-    DATABASE
+    DATABASE,
+    CLOUD
 }

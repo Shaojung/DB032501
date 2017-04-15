@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Student> list;
     ListView lv;
     MyAdapter adapter;
-    final static DAOType MyDAOType = DAOType.DATABASE;
+    final static DAOType MyDAOType = DAOType.CLOUD;
     StudentDAO impl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentShareFile = new Intent(Intent.ACTION_SEND);
 
                 if(dataFile.exists()) {
-                    intentShareFile.setType("text/csv");
+                    intentShareFile.setType("text/html");
                     intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+dataFile));
 
                     intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
