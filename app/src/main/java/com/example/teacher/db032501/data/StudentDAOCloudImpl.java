@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.teacher.db032501.MainActivity;
+import com.example.teacher.db032501.MyAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,10 +56,10 @@ public class StudentDAOCloudImpl implements StudentDAO {
                 {
                     data = new ArrayList<Student>();
                 }
-                ((MainActivity) context).list = getAllStudents();
-                Log.d("MYDB", "List size:" + ((MainActivity) context).list.size());
-                ((MainActivity) context).adapter.notifyDataSetChanged();
 
+                ((MainActivity) context).list = getAllStudents();
+                ((MainActivity) context).adapter = new MyAdapter(context, ((MainActivity) context).list);
+                ((MainActivity) context).lv.setAdapter(((MainActivity) context).adapter);
             }
 
             @Override
