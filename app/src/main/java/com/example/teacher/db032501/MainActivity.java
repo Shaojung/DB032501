@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,8 +19,15 @@ import com.example.teacher.db032501.data.Student;
 import com.example.teacher.db032501.data.StudentDAO;
 import com.example.teacher.db032501.data.StudentDAOFactory;
 import com.example.teacher.db032501.data.StudentDAOMemoryImpl;
+import com.google.gson.Gson;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<String> str = new ArrayList<>();
@@ -99,6 +107,31 @@ public class MainActivity extends AppCompatActivity {
             adapter.chks = new boolean[list.size()];
             adapter.notifyDataSetChanged();
         }
+        if (item.getItemId() == R.id.menuShare)
+        {
+            SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+            Date current = new Date();
+            File dataFile = new File(getCacheDir().getAbsoluteFile() + File.separator + "data" + sdFormat.format(current) + ".csv");
+            StringBuilder sb = new StringBuilder();
+            BufferedWriter bw = null;
+            try {
+                bw = new BufferedWriter(new FileWriter(dataFile));
+                for (Student s : list)
+                {
+                    sb.append(s.ID);
+                    sb.append(",");
+                    sb.append(s.Name + "," + s.Tel + "," + s.Addr);
+                    sb.append("\n");
+                }
+                bw.write(sb.toString());
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }
