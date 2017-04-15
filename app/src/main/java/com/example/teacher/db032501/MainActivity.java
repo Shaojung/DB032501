@@ -2,6 +2,7 @@ package com.example.teacher.db032501;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -125,9 +126,23 @@ public class MainActivity extends AppCompatActivity {
                 }
                 bw.write(sb.toString());
                 bw.close();
+
+                Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+
+                if(dataFile.exists()) {
+                    intentShareFile.setType("text/csv");
+                    intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+dataFile));
+
+                    intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                            "Sharing File...");
+                    intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+
+                    startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
 
         }
