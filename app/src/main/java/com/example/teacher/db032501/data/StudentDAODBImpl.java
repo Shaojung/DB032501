@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +34,17 @@ public class StudentDAODBImpl implements StudentDAO {
 
     @Override
     public void update(Student s) {
+        ContentValues cv = new ContentValues();
+        cv.put("Name", s.Name);
+        cv.put("Tel", s.Tel);
+        cv.put("Addr", s.Addr);
+        db.update("phone", cv, "ID=?", new String[]{String.valueOf(s.ID)});
 
     }
 
     @Override
     public void remove(Student s) {
+        db.delete("phone", "ID=?", new String[]{String.valueOf(s.ID)});
 
     }
 
@@ -49,11 +56,11 @@ public class StudentDAODBImpl implements StudentDAO {
     @Override
     public Student getStudent(int ID) {
         Cursor c = db.query("phone", new String[] {"ID", "Name", "Tel", "Addr"}, "ID=?", new String[] {String.valueOf(ID)}, null, null, null);
-        if (c.moveToFirst())
-        {
-            return new Student(c.getInt(0), c.getString(1), c.getString(2), c.getString(3));
-        }
-        return null;
+        c.moveToFirst();
+        return new Student(c.getInt(0), c.getString(1), c.getString(2), c.getString(3));
+
+        // Log.d("DB", "after return");
+        // return null;
     }
 
     @Override
