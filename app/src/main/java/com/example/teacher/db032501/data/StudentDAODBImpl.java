@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -50,7 +51,12 @@ public class StudentDAODBImpl implements StudentDAO {
 
     @Override
     public void remove(List<Student> lst) {
-
+        ArrayList<String> params = new ArrayList<>();
+        for (Student s : lst)
+        {
+            params.add(String.valueOf(s.ID));
+        }
+        db.execSQL("Delete From phone Where ID in (" + TextUtils.join(",", params) + ");");
     }
 
     @Override
@@ -79,6 +85,6 @@ public class StudentDAODBImpl implements StudentDAO {
 
     @Override
     public void clearAll() {
-
+        db.execSQL("Delete From phone");
     }
 }
